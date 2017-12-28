@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hi.</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='normalize.css') }}>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href={{ url_for('static', filename='style.css') }} >
+    
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <header class="top">
+            <h1>Jon Killinger</h1>
+        </header>
+
+        <nav class="flex-nav">
+            <a href="#" class="toggleNav">&#9776;Menu</a>
+            <ul>
+                <li>
+                    <a href="#">Item 01</a>
+                </li>
+                <li>
+                    <a href="#">Item 02</a>
+                </li>
+                <li>
+                    <a href="#">Item 03</a>
+                </li>
+                <li>
+                    <a href="#">Item 04</a>
+                </li>
+                <li>
+                    <a href="#">Item 05</a>
+                </li>
+                <li>
+                    <a href="#">Item 06</a>
+                </li>
+                <li class="social">
+                    <a href="https://github.com/jonkillinger">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </li>
+                <li class="social">
+                    <a href="https://www.linkedin.com/in/jonkillinger/">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <script>
+
+        $(function () {
+            $(".toggleNav").on("click", function () {
+                $(".flex-nav ul").toggleClass("open");
+            });
+        });
+
+    </script>
+</body>
+
+</html>
