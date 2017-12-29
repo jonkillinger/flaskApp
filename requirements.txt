@@ -1,2 +1,6 @@
 Flask
 gunicorn
+requests
+bz2
+re
+urllib
