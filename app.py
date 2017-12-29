@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 import bz2
 import requests
 import re
