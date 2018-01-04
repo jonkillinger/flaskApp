@@ -12,10 +12,19 @@
 </head>
 
 <body>
-    <form action="{{ url_for('perform_scrape') }}" method="post">
-        <input type="text" name="inputURL">
-        <input type="submit" value="Login">
+    <h1>URL shortener. Enter a URL below</h1>
+    <form action="{{ url_for('idx') }}" method="post">
+        <input type="text" name="myUrl">
+        <input type="submit" value="Convert">
     </form>
+    {% if minifiedUrl %} 
+        <h1>Your minified URL: {{minifiedUrl}}</h1>
+    {% endif %}
+
+    {% if error %}
+        <h1>BadURL</h1>
+    {% endif %}
+
 
     <script>
 
