@@ -1,11 +1,9 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-#from bs4 import BeautifulSoup
-import bz2
 import requests
-import re
 import urllib
+import json
 app = Flask(__name__)
 
 #Thank BeautifulSoup!
@@ -19,35 +17,16 @@ def hello_world():
 
 @app.route('/', methods=['POST'])
 def perform_scrape(myUrl):
-    page = requests.get(myUrl)
-    comp = bz2.compress(page.content)
+    #test = urllib.parse.urlparse(myUrl, scheme='https')
+    #if(test.)
 
-    '''
-    source = urllib.request.urlopen(myUrl).read().decode('utf-16')
-    links = []
-    for link in re.findall(r'(?:http\:|https\:)?\/\/.*\.(?:png|jpg)', source):
-        links.append(link)
-    '''
+    url = 'https://www.googleapis.com/urlshortener/v1/url'
+    payload = {'longUrl': 'http://www.google.com/'}
+    headers = {'content-type': 'application/json',}
 
-    '''
-    if page.status_code == 200:
-        soup = BeautifulSoup(page.content, 'html.parser')
-        links = []
-        for link in soup.find_all('link'):
-            links.append(link.get('href'))
-
-        scripts = []
-        for script in soup.find_all('script'):
-            scripts.append(script.get('src'))
-        '''
-        #imgs = []
-        #for img in soup.findAll('img', attrs={'src': re.compile(r'(?:http\:|https\:)?\/\/.*\.(?:png|jpg)', source)}):
-            #imgs.append(img.get('src'))
-        #for img in soup.find_all('img',re.compile("https")):
-            #imgs.append(img.get('src', ))
-
-
-
-    return str(comp)
-    #else:
-        #return "Unable to obtain content. (Bad URL?)"
+    r = requests.post(url + '?key=AIzaSyComkfwDtEEUV65whc-zn5ElqrlplFIgEc', data=json.dumps(payload), headers=headers)
+    if r.status_code == requests.codes.ok:
+        minifiedUrl = r.json()
+        return minifiedUrl['id']
+    
+    return r.status_code
