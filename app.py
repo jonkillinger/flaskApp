@@ -5,7 +5,9 @@ import requests
 import urllib
 import json
 import sys
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
+app.config.from_pyfile('config.py')
+
 
 @app.route('/', methods=['GET', 'POST'])
 def idx():
@@ -15,10 +17,10 @@ def idx():
         url = 'https://www.googleapis.com/urlshortener/v1/url'
         #payload = {'longUrl': 'http://www.google.com/'}
         myUrl = request.form['myUrl']
-        print('URL is: ' + myUrl, file=sys.stderr)
+        #print('URL is: ' + myUrl, file=sys.stderr)
         payload = {'longUrl': str(myUrl)}
         headers = {'content-type': 'application/json',}
-        r = requests.post(url + '?key=AIzaSyComkfwDtEEUV65whc-zn5ElqrlplFIgEc', data=json.dumps(payload), headers=headers)
+        r = requests.post(url + '?key=' + app.config["APIKEY"], data=json.dumps(payload), headers=headers)
         if r.status_code == requests.codes.ok:
             minifiedUrl = r.json()
             #return minifiedUrl['id']
@@ -45,6 +47,6 @@ def perform_scrape(myUrl):
         if r.status_code == requests.codes.ok:
             minifiedUrl = r.json()
             return minifiedUrl['id']
-        
+
     return r.status_code
 '''
